@@ -18,6 +18,9 @@ add_definitions( ${PCL_DEFINITIONS} )
 add_executable (iterative_closest_point iterative_closest_point.cpp)
 target_link_libraries (iterative_closest_point ${PCL_LIBRARIES})
 
+# 使用迭代最近点算法，逐步实现地对一系列点云进行两两匹配
+add_executable (pairwise_icp pairwise_incremental_registration.cpp)
+target_link_libraries (pairwise_icp ${PCL_LIBRARIES})
 
 # 交互式ICP可视化的程序
 add_executable(iterative_icp_space iterative_icp_space.cpp)

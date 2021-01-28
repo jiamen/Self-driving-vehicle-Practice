@@ -30,7 +30,6 @@ int main( int argc, char* *argv )
     Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-Hamming");
 
 
-
     //-- 第一步:检测 Oriented FAST 角点位置
     detector->detect( img_1, keypoints_1 );
     detector->detect( img_2, keypoints_2 );
@@ -39,16 +38,15 @@ int main( int argc, char* *argv )
     descriptor->compute( img_1, keypoints_1, descriptors_1 );
     descriptor->compute( img_2, keypoints_2, descriptors_2 );
 
+    // 附加一步，将找到的关键特征点画出来，再显示
     Mat outimg1;
     drawKeypoints( img_1, keypoints_1, outimg1, Scalar::all(-1), DrawMatchesFlags::DEFAULT );
     imshow("ORB Feature points", outimg1);
-
 
     //-- 第三步:对两幅图像中的BRIEF描述子进行匹配，使用 Hamming 距离
     vector<DMatch> matches;
     // BFMatcher matcher( NORM_HAMMING );
     matcher->match( descriptors_1, descriptors_2, matches );
-
 
     //-- 第四步:匹配点对筛选
     double min_dist = 1000, max_dist = 0;
